@@ -1,34 +1,16 @@
-var builder = WebApplication.CreateBuilder(args);
-var app = builder.Build();
+Console.WriteLine("What is your favorite flavor of ice cream?");
+string? flavor = Console.ReadLine();
 
-app.Urls.Add("http://localhost:5000");
-
-app.MapGet("/", () => "Hello World!");
-
-app.MapGet("/{cityName}/weather", GetWeatherByCity);
-
-app.Run();
-
-
-Weather GetWeatherByCity(string cityName)
+if (flavor == null)
 {
-    app.Logger.LogInformation($"Weather requested for {cityName}.");
-    var weather = new Weather(cityName);
-    return weather;
+    flavor = "vanilla";
 }
-
-public record Weather
+if(flavor == "vanilla")
 {
-    public string City { get; set; }
-
-    public Weather(string city)
-    {
-        City = city;
-        Conditions = "Cloudy";
-        // Temperature here is in celsius degrees, hence the 0-40 range.
-        Temperature = new Random().Next(0,40).ToString();
-    }
-
-    public string Conditions { get; set; }
-    public string Temperature { get; set; }
+    Console.WriteLine("You're basic");
 }
+if(flavor == "strawberry")
+{
+    Console.WriteLine("That's fruity");
+}
+Console.WriteLine($"Your favorite flavor of ice cream is {flavor}");
